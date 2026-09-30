@@ -21,7 +21,7 @@ https://github.com/nckstwrt/Vita3K-Plus/releases
 
 ## Enhancements
 
-# v1.2 - Not yet released
+# v1.2 - Released 30th Sept 2026
 - **Soul Sacrifice Delta** - Outline missing regression + floor textures fixed (Thanks doctorthoss and NaGaa95!)
 - **Madden 13** - Commentary + Crowd sounds working + Load/Save Fixes
 - **Mortal Kombat** - Broken video colours fixed
