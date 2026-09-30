@@ -44,7 +44,9 @@ https://github.com/nckstwrt/Vita3K-Plus/releases
 - **Shin Gundam Mosou** - Fix missing laser/effect graphics. Fix voices/dialogue. (thanks to mohawku-bit's Enhanced version which was used as a reference)
 - **Injustice** - Gods Among Us - Projectiles now show
 - **Uncharted** - Fix for camera pictures being green
+- **MotoGP 14** Fixed bike being black
 - **Mali Vertex Issue** - Fixes some vertices appearing stretched (e.g. The title screen butterfly in Soul Sacrifice Delta)
+- **Double Buffer Improvements** - Mali generally will fallback to Double Buffer (even with other memory mappings selected). So this should make Mali significantly better.
 - **Adreno 6xx + Turnip** - Fix for black checkered pattern sometimes appearing in some games
 
 
