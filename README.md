@@ -24,7 +24,7 @@ https://github.com/nckstwrt/Vita3K-Plus/releases
 # v1.3 - Currently Unreleased
 - **Pixeljunk Shooter ultimate** - Sound glitches fixed
 - **UNDER NIGHT IN-BIRTH** - Fixed flickering
-- **Madoka Magica** - The Battle Pentagram - Graphics fixes
+- **Madoka Magica - The Battle Pentagram** - Graphics fixes
 - **Ratchet & Clank** - Vertex renderering fixes
 - **Samurai Warriors 4** - Fix for freezing
 - **Rayman Legends** - Fix for level end freeze
