@@ -21,6 +21,15 @@ https://github.com/nckstwrt/Vita3K-Plus/releases
 
 ## Enhancements
 
+# v1.3 - Currently Unreleased
+- **Pixeljunk Shooter ultimate** - Sound glitches fixed
+- **UNDER NIGHT IN-BIRTH** - Fixed flickering
+- **Madoka Magica** - The Battle Pentagram - Graphics fixes
+- **Ratchet & Clank** - Vertex renderering fixes
+- **Samurai Warriors 4** - Fix for freezing
+- **Rayman Legends** - Fix for level end freeze
+- **MotoGP 14** - Fix for audio stuttering on Android
+
 # v1.2 - Released 30th Sept 2026
 - **Soul Sacrifice Delta** - Outline missing regression + floor textures fixed (Thanks doctorthoss and NaGaa95!)
 - **Madden 13** - Commentary + Crowd sounds working + Load/Save Fixes
