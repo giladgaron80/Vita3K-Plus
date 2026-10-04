@@ -29,6 +29,8 @@ https://github.com/nckstwrt/Vita3K-Plus/releases
 - **Samurai Warriors 4** - Fix for freezing
 - **Rayman Legends** - Fix for level end freeze
 - **MotoGP 14** - Fix for audio stuttering on Android
+- **Killzone** - Fix for crashing on some Android devices
+- **DariusBurst CS** - Graphics fix
 
 # v1.2 - Released 30th Sept 2026
 - **Soul Sacrifice Delta** - Outline missing regression + floor textures fixed (Thanks doctorthoss and NaGaa95!)
