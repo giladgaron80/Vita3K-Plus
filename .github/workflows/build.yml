@@ -1,0 +1,37 @@
+name: Build Vita3K ARM64 Linux
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Cross-Compile Dependencies
+        run: |
+          sudo apt update && sudo apt install -y \
+            cmake ninja-build g++-aarch64-linux-gnu gcc-aarch64-linux-gnu \
+            pkg-config libsdl2-dev libgtk-3-dev libssl-dev
+
+      - name: Configure CMake for ARM64
+        run: |
+          cmake -B build-arm64 -G Ninja \
+            -DCMAKE_SYSTEM_NAME=Linux \
+            -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
+            -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc \
+            -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ \
+            -DYUZU_USE_BUNDLED_FFMPEG=OFF \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBoost_NO_SYSTEM_PATHS=ON
+
+      - name: Compile with High-Core Power
+        run: cmake --build build-arm64 -j$(nproc)
+
+      - name: Upload Binary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vita3K-ARM64-Binary
+          path: build-arm64/bin/Vita3K
