@@ -13,6 +13,8 @@ jobs:
       - name: Install ARM64 Cross-Compilation Toolchain and Qt6 for Cross-Compilation
         run: |
           sudo apt-get update
+          sudo dpkg --add-architecture arm64
+          sudo apt-get update
           sudo apt-get install -y \
             cmake ninja-build \
             g++-aarch64-linux-gnu gcc-aarch64-linux-gnu \
