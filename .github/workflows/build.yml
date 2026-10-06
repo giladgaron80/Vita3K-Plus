@@ -14,7 +14,9 @@ jobs:
         run: |
           sudo apt update && sudo apt install -y \
             cmake ninja-build g++-aarch64-linux-gnu gcc-aarch64-linux-gnu \
-            pkg-config libsdl2-dev libgtk-3-dev libssl-dev
+            pkg-config libsdl2-dev libgtk-3-dev libssl-dev \
+            qt6-base-dev qt6-declarative-dev
+            
 
       - name: Configure CMake for ARM64
         run: |
