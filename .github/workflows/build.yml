@@ -65,8 +65,8 @@ jobs:
             --plugin qt \
             --output appimage
     
-          - name: Upload Binary Artifact
-            uses: actions/upload-artifact@v4
-            with:
-              name: Vita3K-ARM64-Binary
-              path: build/linux-ninja-clang/bin/Debug/Vita3K
+      - name: Upload Binary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vita3K-ARM64-Binary
+          path: build/linux-ninja-clang/bin/Debug/Vita3K
