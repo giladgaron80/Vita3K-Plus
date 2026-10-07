@@ -20,7 +20,7 @@ jobs:
           pipx install aqtinstall
           aqt install-qt linux_arm64 desktop 6.11.0 linux_gcc_arm64 \
             --outputdir ${{ github.workspace }}/Qt \
-            -m qtmultimedia qtsvg qttools qtwayland
+            -m qtmultimedia 
             
       - name: Configure CMake Natively
         run: |
