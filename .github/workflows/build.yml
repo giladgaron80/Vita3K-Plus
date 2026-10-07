@@ -13,7 +13,7 @@ jobs:
       - name: Install Native ARM64 Dependencies
         run: |
           sudo apt-get update
-          sudo apt install git cmake ninja-build libsdl2-dev pkg-config libgtk-3-dev clang lld xdg-desktop-portal openssl libssl-dev qt6-base-dev libxcb-cursor0
+          sudo apt install git cmake ninja-build libsdl2-dev pkg-config libgtk-3-dev clang lld xdg-desktop-portal openssl libssl-dev qt6-base-dev libxcb-cursor0 libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
       
       - name: Download Official Qt 6.11.0 Natively
         run: |
