@@ -47,7 +47,7 @@ jobs:
           Type=Application
           Categories=Game;Emulator;
           EOF
-          wget -O vita3k.png https://raw.githubusercontent.com/Vita3K/Vita3K/master/vfs/app/Vita3K/sce_sys/icon0.png
+          cp data/image/icon.png vita3k.png
           
           # 3. Set environment variables to point linuxdeploy to our custom Qt 6.11.0
           export APPIMAGE_EXTRACT_AND_RUN=1  # Bypasses FUSE requirement on cloud runners
