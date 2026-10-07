@@ -30,8 +30,6 @@ jobs:
 
       - name: Compile with High-Core Power
         run: cmake --build build/linux-ninja-clang
-              -DCMAKE_PREFIX_PATH="${{ github.workspace }}/Qt/6.11.0/gcc_arm64" \
-              -DQt6_DIR="${{ github.workspace }}/Qt/6.11.0/gcc_arm64/lib/cmake/Qt6"
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
