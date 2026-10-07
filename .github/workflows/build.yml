@@ -4,80 +4,40 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Install ARM64 Cross-Compilation Toolchain and Qt6 for Cross-Compilation
+      - name: Install Native ARM64 Dependencies
         run: |
           sudo apt-get update
-          sudo dpkg --add-architecture arm64
-          sudo apt-get update
           sudo apt-get install -y \
-            cmake ninja-build \
-            g++-aarch64-linux-gnu gcc-aarch64-linux-gnu \
+            cmake ninja-build g++ gcc \
             pkg-config \
-            libssl-dev:arm64 \
-            libsdl2-dev:arm64 \
-            libgtk-3-dev:arm64 \
-            libx11-dev:arm64 \
-            libwayland-dev:arm64 \
-            libxkbcommon-dev:arm64 \
-            libfontconfig1-dev:arm64 \
-            libfreetype6-dev:arm64 \
-            libharfbuzz-dev:arm64 \
-            libpng-dev:arm64 \
-            libjpeg-dev:arm64 \
-            libgl1-mesa-dev:arm64 \
-            libglu1-mesa-dev:arm64
-          
-          # Enable multiarch support for arm64
-          sudo dpkg --add-architecture arm64
-          sudo apt-get update
-          
-          # Install Qt6 development packages for ARM64
-          sudo apt-get install -y \
-            qt6-base-dev:arm64 \
-            qt6-declarative-dev:arm64 \
-            qt6-tools-dev:arm64 \
-            libqt6core6:arm64 \
-            libqt6gui6:arm64 \
-            libqt6widgets6:arm64 \
-            libqt6network6:arm64 \
-            libqt6concurrent6:arm64 \
-            libqt6svg6:arm64 \
-            libqt6multimedia6:arm64
+            libssl-dev libsdl2-dev libgtk-3-dev \
+            libx11-dev libwayland-dev libxkbcommon-dev \
+            libfontconfig1-dev libfreetype6-dev \
+            libharfbuzz-dev libpng-dev libjpeg-dev \
+            libgl1-mesa-dev libglu1-mesa-dev \
+            qt6-base-dev qt6-declarative-dev qt6-tools-dev \
+            libqt6core6 libqt6gui6 libqt6widgets6 \
+            libqt6network6 libqt6concurrent6 \
+            libqt6svg6 libqt6multimedia6
 
-      - name: Configure CMake for ARM64 Cross-Compilation
+      - name: Configure CMake Natively
         run: |
-          cmake -B build-arm64 -G Ninja \
-            -DCMAKE_SYSTEM_NAME=Linux \
-            -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
-            -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc \
-            -DCMAKE_CXX_COMPILER=aarch64-linux-gnu-g++ \
-            -DCMAKE_C_COMPILER_TARGET=aarch64-linux-gnu \
-            -DCMAKE_CXX_COMPILER_TARGET=aarch64-linux-gnu \
-            -DCMAKE_FIND_ROOT_PATH=/usr/aarch64-linux-gnu \
-            -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
-            -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
-            -DCMAKE_PKG_CONFIG_EXECUTABLE=/usr/bin/pkg-config \
-            -DPKG_CONFIG_EXECUTABLE=/usr/bin/pkg-config \
+          cmake -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
             -DYUZU_USE_BUNDLED_FFMPEG=OFF \
-            -DQt6_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt6 \
-            -DQt6CoreTools_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt6CoreTools \
-            -DQt6GuiTools_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt6GuiTools \
-            -DQt6WidgetsTools_DIR=/usr/lib/aarch64-linux-gnu/cmake/Qt6WidgetsTools \
-            -DCMAKE_PREFIX_PATH=/usr/lib/aarch64-linux-gnu/cmake
+            -DBoost_NO_SYSTEM_PATHS=ON
 
       - name: Compile with High-Core Power
-        run: cmake --build build-arm64 -j$(nproc)
+        run: cmake --build build -j$(nproc)
 
       - name: Upload Binary Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Vita3K-ARM64-Binary
-          path: build-arm64/bin/Vita3K
+          path: build/bin/Vita3K
