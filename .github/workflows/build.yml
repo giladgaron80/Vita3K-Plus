@@ -30,7 +30,6 @@ jobs:
 
       - name: Compile with High-Core Power
         run: cmake --build build/linux-ninja-clang
-              -DBoost_NO_SYSTEM_PATHS=ON \
               -DCMAKE_PREFIX_PATH="${{ github.workspace }}/Qt/6.11.0/gcc_arm64" \
               -DQt6_DIR="${{ github.workspace }}/Qt/6.11.0/gcc_arm64/lib/cmake/Qt6"
 
