@@ -38,7 +38,7 @@ jobs:
           wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-aarch64.AppImage
           chmod +x linuxdeploy-aarch64.AppImage linuxdeploy-plugin-qt-aarch64.AppImage
           
-          # 2. Create a basic Desktop file and grab an icon (required for AppImages)
+          # 2. Create a basic Desktop file and copy the existing icon from the source
           cat <<EOF > Vita3K.desktop
           [Desktop Entry]
           Name=Vita3K
@@ -49,21 +49,24 @@ jobs:
           EOF
           cp data/image/icon.png vita3k.png
           
-          # 3. Set environment variables to point linuxdeploy to our custom Qt 6.11.0
-          export APPIMAGE_EXTRACT_AND_RUN=1  # Bypasses FUSE requirement on cloud runners
+          # 3. Delete the broken GStreamer plugin (Qt6 uses FFmpeg by default anyway)
+          rm -f "${{ github.workspace }}/Qt/6.11.0/gcc_arm64/plugins/multimedia/libgstreamermediaplugin.so"
+          
+          # 4. Set environment variables to point linuxdeploy to our custom Qt 6.11.0
+          export APPIMAGE_EXTRACT_AND_RUN=1
           export QMAKE="${{ github.workspace }}/Qt/6.11.0/gcc_arm64/bin/qmake"
           export EXTRA_QT_MODULES="wayland;multimedia;svg"
           
-          # 4. Generate the AppDir and compile the final AppImage
+          # 5. Generate the AppDir and compile the final AppImage
           ./linuxdeploy-aarch64.AppImage --appdir AppDir \
             -e build/linux-ninja-clang/bin/Debug/Vita3K \
             -i vita3k.png \
             -d Vita3K.desktop \
             --plugin qt \
             --output appimage
-
-      - name: Upload Binary Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Vita3K-ARM64-Binary
-          path: build/linux-ninja-clang/bin/Debug/Vita3K
+    
+          - name: Upload Binary Artifact
+            uses: actions/upload-artifact@v4
+            with:
+              name: Vita3K-ARM64-Binary
+              path: build/linux-ninja-clang/bin/Debug/Vita3K
